@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dkTools_karpiu:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/dkTools_karpiu_jar</output-path>
+    <root id="archive" name="dkTools_karpiu.jar">
+      <element id="module-output" name="dkTools_karpiu" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mongodb/mongo-java-driver/3.12.7/mongo-java-driver-3.12.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

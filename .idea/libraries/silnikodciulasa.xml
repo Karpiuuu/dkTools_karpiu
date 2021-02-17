@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="silnikodciulasa">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../reszta/SILNIKI/silnikodciulasa.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../reszta/SILNIKI/silnikodciulasa.jar!/" />
+    </SOURCES>
+  </library>
+</component>
