@@ -2,6 +2,6 @@
 #### Plugin tools pod twoj serwer minecraft!
 
 ## Do zrobienia:
-- [ ] Mongodb connect
+- [X] Mongodb connect
 - [ ] Podstawowe komendy dla gracza
 - [ ] Podstawowe komendy dla administracji
