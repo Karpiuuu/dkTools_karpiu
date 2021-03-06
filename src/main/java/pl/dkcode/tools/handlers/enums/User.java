@@ -2,19 +2,24 @@ package pl.dkcode.tools.handlers.enums;
 
 import com.google.gson.Gson;
 import org.bson.Document;
-import pl.dkcode.tools.handlers.MongoHandler;
 import pl.dkcode.tools.handlers.UserHandler;
+
+import java.util.Locale;
 
 public class User {
 
     private final String name;
     private final String ip;
     private Integer connect_int;
+    private String group;
+    private long group_time;
 
     public User(String name, String ip, Integer connect_int) {
         this.name = name;
         this.ip = ip;
         this.connect_int = connect_int;
+        this.group = "PLAYER";
+        this.group_time = 0L;
         insert();
     }
 
@@ -35,6 +40,7 @@ public class User {
     }
 
     private void insert(){
+        if(group == null) group = GroupType.PLAYER.getName().toUpperCase();
         UserHandler.getCollection().insertOne(Document.parse(new Gson().toJson(this)));
     }
 
@@ -46,4 +52,23 @@ public class User {
         UserHandler.getCollection().findOneAndDelete(new Document("name", name));
     }
 
+    public GroupType getGroup() {
+        return GroupType.valueOf(group.toUpperCase());
+    }
+
+    public void setGroup(GroupType group) {
+        this.group = group.getName().toUpperCase();
+    }
+
+    public long getGroup_time() {
+        return group_time;
+    }
+
+    public boolean isGroupExpired(){
+        return (group_time != 0L && group_time < System.currentTimeMillis());
+    }
+
+    public void setGroup_time(long group_time) {
+        this.group_time = group_time;
+    }
 }

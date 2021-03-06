@@ -5,17 +5,23 @@ import com.mongodb.Block;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.bukkit.entity.Player;
+import pl.dkcode.tools.handlers.enums.GroupType;
 import pl.dkcode.tools.handlers.enums.User;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class UserHandler {
 
     private static final Map<String, User> users = new HashMap<>();
 
     private static MongoCollection collection;
+
+    private static ScheduledExecutorService service = new ScheduledThreadPoolExecutor(4);
 
 
     public UserHandler(MongoCollection collection){
@@ -28,6 +34,13 @@ public class UserHandler {
                 e.printStackTrace();
             }
         });
+
+        service.scheduleAtFixedRate(() -> users.values().forEach(u -> {
+            if(u.isGroupExpired()) {
+                u.setGroup(GroupType.PLAYER);
+                u.setGroup_time(0L);
+            }
+        }),0,3000, TimeUnit.MILLISECONDS);
     }
 
     public static User create(Player player){
@@ -39,6 +52,10 @@ public class UserHandler {
 
     public static User get(Player p){
         return users.get(p.getName());
+    }
+
+    public static User get(String p){
+        return users.get(p);
     }
 
     public static MongoCollection getCollection() {
