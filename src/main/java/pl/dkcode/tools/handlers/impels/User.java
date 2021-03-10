@@ -1,8 +1,9 @@
-package pl.dkcode.tools.handlers.enums;
+package pl.dkcode.tools.handlers.impels;
 
 import com.google.gson.Gson;
 import org.bson.Document;
 import pl.dkcode.tools.handlers.UserHandler;
+import pl.dkcode.tools.handlers.enums.GroupType;
 
 import java.util.Locale;
 

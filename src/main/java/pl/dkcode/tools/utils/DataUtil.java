@@ -15,20 +15,22 @@ public class DataUtil {
     }
 
     public static String secondsToString(long l) {
-        int seconds = (int)((l - System.currentTimeMillis()) / 1000L);
-        StringBuilder sb = new StringBuilder();
-        Iterator var4 = values.entrySet().iterator();
-
-        while(var4.hasNext()) {
-            Entry<Integer, String> e = (Entry)var4.next();
-            int iDiv = seconds / (Integer)e.getKey();
+        int seconds = (int)((l - System.currentTimeMillis())/ 1000);
+        final StringBuilder sb = new StringBuilder();
+        if(seconds < 1){
+            return "<1s";
+        }
+        for (final Map.Entry<Integer, String> e : DataUtil.values.entrySet()) {
+            final int iDiv = seconds / e.getKey();
             if (iDiv >= 1) {
-                int x = (int)Math.floor((double)iDiv);
-                sb.append(x + (String)e.getValue()).append("");
-                seconds -= x * (Integer)e.getKey();
+                final int x = (int) Math.floor(iDiv);
+                sb.append(x).append(e.getValue());
+                seconds -= x * e.getKey();
             }
         }
-
+        if(sb.toString().equals("")){
+            return "<1s";
+        }
         return sb.toString();
     }
 

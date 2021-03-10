@@ -6,9 +6,8 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.bukkit.entity.Player;
 import pl.dkcode.tools.handlers.enums.GroupType;
-import pl.dkcode.tools.handlers.enums.User;
+import pl.dkcode.tools.handlers.impels.User;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;

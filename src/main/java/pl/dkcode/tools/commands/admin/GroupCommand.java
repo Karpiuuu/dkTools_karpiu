@@ -7,13 +7,11 @@ import pl.dkcode.tools.ToolsPlugin;
 import pl.dkcode.tools.handlers.CommandHandler;
 import pl.dkcode.tools.handlers.UserHandler;
 import pl.dkcode.tools.handlers.enums.GroupType;
-import pl.dkcode.tools.handlers.enums.User;
+import pl.dkcode.tools.handlers.impels.User;
 import pl.dkcode.tools.utils.ChatUtil;
 import pl.dkcode.tools.utils.DataUtil;
 
-import java.security.acl.Group;
 import java.util.List;
-import java.util.Locale;
 
 public class GroupCommand extends CommandHandler.Command {
     public GroupCommand(String name, GroupType perm, String usage, List<String> aliases, ToolsPlugin plugin) {
@@ -29,7 +27,7 @@ public class GroupCommand extends CommandHandler.Command {
         }
         Player p = Bukkit.getPlayer(args[0]);
         User u = UserHandler.get(p);
-        GroupType type = GroupType.valueOf(args[1]);
+        GroupType type = GroupType.valueOf(args[1].toUpperCase());
         if(type == null){
             return ChatUtil.sendMessage(sender, "&cTaka grupa nie istnieje!");
         }

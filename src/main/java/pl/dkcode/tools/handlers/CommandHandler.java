@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.SimplePluginManager;
 import pl.dkcode.tools.ToolsPlugin;
 import pl.dkcode.tools.handlers.enums.GroupType;
-import pl.dkcode.tools.handlers.enums.User;
+import pl.dkcode.tools.handlers.impels.User;
 import pl.dkcode.tools.utils.ChatUtil;
 
 import java.lang.reflect.Field;
@@ -53,11 +53,13 @@ public class CommandHandler {
         }
 
         public boolean execute(final CommandSender sender, String label, final String[] args) {
-            Player p = (Player) sender;
-            User u = UserHandler.get(p);
-            if ((u == null && sender instanceof Player) || sender instanceof Player &&
-                    perm.getLevel() > u.getGroup().getLevel()) {
-                ChatUtil.sendMessage((Player) sender, "&cNie masz uprawnien do uzycia tej komendy!");
+            User u = null;
+            if(sender instanceof Player) {
+                Player p = (Player) sender;
+                u = UserHandler.get(p);
+            }
+            if (u == null && sender instanceof Player || sender instanceof Player && perm.getLevel() > u.getGroup().getLevel()) {
+                ChatUtil.sendMessage(sender, "&cNie masz uprawnien do uzycia tej komendy!");
                 return true;
             }
             return onExecute(sender, args);

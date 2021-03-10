@@ -23,11 +23,12 @@ public class BanCommand extends CommandHandler.Command {
 
     @Override
     public boolean onExecute(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
-        // /ban <nick> <czas/perm> <powod>
-        if(args.length < 3){
-            doUsage(player);
-            return false;
+        if(sender instanceof Player){
+            Player player = (Player) sender;
+            if(args.length < 3){
+                doUsage(player);
+                return false;
+            }
         }
         OfflinePlayer target = getPlugin().getServer().getOfflinePlayer(args[0]);
         if(target == null){
@@ -52,6 +53,7 @@ public class BanCommand extends CommandHandler.Command {
                             "\n&7Niesluszny ban? Wejdz na ts3: &4ts.crafteria.pl &7lub na fp: &4fp.crafteria.pl";
             targetPlayer.kickPlayer(ChatUtil.fixColor(reason));
         }
+        getPlugin().getServer().getOnlinePlayers().forEach(targetMessage -> ChatUtil.sendMessage(targetMessage, "&7Gracz &9" + args[0] + "&7 zostal zbanowany przez: &9" + sender.getName() + "&7 z powodem: &9"+ ban.getReason()));
         return false;
     }
 }

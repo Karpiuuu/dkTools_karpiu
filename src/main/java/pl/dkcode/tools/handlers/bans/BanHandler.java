@@ -15,6 +15,10 @@ public class BanHandler {
     private static MongoCollection collection;
 
 
+    public static Integer getAmount(){
+        return bans.size();
+    }
+
 
     public BanHandler(MongoCollection collection) {
         this.collection = collection;
